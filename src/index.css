@@ -1,0 +1,74 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #522546;
+  display: flex;
+  height: 90vh;
+  padding: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: karla;
+}
+
+div#root{
+  height: 100%;
+  width: 100%;
+  max-width: 400px;
+  max-height: 400px;
+}
+
+main {
+  background-color: #F5F5F5;
+  height: 100%; 
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+} 
+
+.buttons {
+  display: grid;
+  justify-content: center;
+  gap: 20px;
+  grid-template-columns: auto auto auto auto auto;
+}
+
+.buttons button {
+  width: 35.84px;
+  height: 35.84px;
+  box-shadow: 0px 2px 2px rgb(000 00 0 / 15%);
+  border: none;
+  border-radius: 3.81px;
+  background-color: white;
+  font-family: karla;
+  color: #522546;
+  font-size: 20.59px;
+  font-weight: bold;
+  cursor: pointer; 
+}
+
+.rollDiceDiv {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+  position: relative;
+}
+
+.rollDiceBtn {
+  background-color: #522546;
+  color: white;
+  font-weight: bold;
+  font-size: 16.38px;
+  border: none;
+  border-radius: 3.81px;
+  width: 92px;
+  height: 36px;
+  cursor: pointer; 
+  box-shadow: 0px 3.2px 7.68px rgb(000 00 0 / 18%);
+}
+
