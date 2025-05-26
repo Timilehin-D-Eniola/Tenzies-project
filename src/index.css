@@ -28,6 +28,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
 } 
 
 .buttons {
@@ -35,6 +36,7 @@ main {
   justify-content: center;
   gap: 20px;
   grid-template-columns: auto auto auto auto auto;
+  margin-bottom: 40px;
 }
 
 .buttons button {
@@ -66,9 +68,25 @@ main {
   font-size: 16.38px;
   border: none;
   border-radius: 3.81px;
-  width: 92px;
+  white-space: nowrap;
+  width: auto;
+  padding: 6px 21px;
   height: 36px;
   cursor: pointer; 
   box-shadow: 0px 3.2px 7.68px rgb(000 00 0 / 18%);
 }
 
+.instructions {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    margin-top: 0;
+    text-align: center;
+    color: #522546;
+}
+
+.title {
+    font-size: 40px;
+    margin: 0;
+     font-family: karla;
+     color: #522546;
+}

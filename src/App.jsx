@@ -1,9 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useWindowSize } from 'react-use'
+import Confetti from 'react-confetti'
 import Die from "../components/Die.jsx";
 import { nanoid } from "nanoid";
 
 export default function App() {
-  const [dieRoll, setDieRoll] = useState(generateAllNewDice());
+  const rollSound = new Audio ("/dice-roll.mp3")
+  const winSound  = new Audio ("/you-win.mp3")
+   const { width, height } = useWindowSize();
+  const [dieRoll, setDieRoll] = useState(() => generateAllNewDice());
+
+const gameWon = 
+dieRoll.every(die => die.isHeld) && 
+      dieRoll.every(die => die.value === dieRoll[0].value)
+
+       useEffect(() => {
+    if (gameWon) {
+      winSound.play();
+    }
+  }, [gameWon]);
+
+
+  function generateAllNewDice() {
+    const newDice = [];
+
+    for (let i = 0; i < 10; i++) {
+      newDice.push({
+        id: nanoid(),
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false,
+      });
+    }
+
+    return newDice;
+  }
+
+  
+
+  function rollDice() {
+    if (!gameWon) {
+      rollSound.play();
+        setDieRoll((prevRoll) =>
+      prevRoll.map((die) =>
+        die.isHeld ? die : { ...die, value: Math.ceil(Math.random() * 6) }
+      )
+    );
+    } else {
+      setDieRoll(generateAllNewDice())
+    }
+    
+  }
 
   function hold(id) {
     setDieRoll((prevDie) =>
@@ -20,20 +66,6 @@ export default function App() {
     );
   }
 
-  function generateAllNewDice() {
-    const newDice = [];
-
-    for (let i = 0; i < 10; i++) {
-      newDice.push({
-        id: nanoid(),
-        value: Math.ceil(Math.random() * 6),
-        isHeld: false,
-      });
-    }
-
-    return newDice;
-  }
-
   const allDice = dieRoll.map((num) => (
     <Die
       key={num.id}
@@ -44,16 +76,21 @@ export default function App() {
     />
   ));
 
-  function handleClick() {
-    setDieRoll(generateAllNewDice);
-  }
-
   return (
     <main>
+    { gameWon && <Confetti
+      width={width}
+      height={height}
+    />}
+      <h1 className="title">Tenzies</h1>
+      <p className="instructions">
+        Roll until all dice are the same. Click each die to freeze it at its
+        current value between rolls.
+      </p>
       <div className="buttons">{allDice}</div>
       <div className="rollDiceDiv">
-        <button onClick={handleClick} className="rollDiceBtn">
-          Roll
+        <button onClick={rollDice} className="rollDiceBtn">
+          {gameWon ? "New Game" : "Roll" }
         </button>
       </div>
     </main>
