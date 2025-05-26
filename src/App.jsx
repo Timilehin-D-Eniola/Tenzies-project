@@ -84,9 +84,8 @@ dieRoll.every(die => die.isHeld) &&
     />}
       <h1 className="title">Tenzies</h1>
       <p className="instructions">
-        Roll until all dice are the same. Click each die to freeze it at its
-        current value between rolls.
-      </p>
+        {gameWon ? "You Won!" : "Roll until all dice are the same. Click each die to freeze it at its current value between rolls."
+        }</p>
       <div className="buttons">{allDice}</div>
       <div className="rollDiceDiv">
         <button onClick={rollDice} className="rollDiceBtn">
